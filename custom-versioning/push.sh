@@ -25,6 +25,11 @@ mike deploy --push --update-aliases "${VERSION}" latest
 # Set the default version to latest
 mike set-default --push latest
 
+# Checkout to gh-pages branch
+git checkout gh-pages
+# Pull again for remote changes
+git pull origin gh-pages
+
 # Copy necessary files from main branch
 git checkout main -- custom-versioning/.
 
