@@ -25,6 +25,9 @@ git checkout gh-pages
 # Pull remote changes if any
 git pull origin gh-pages
 
+# Copy necessary files from main branch
+git checkout main -- custom-versioning/.
+
 # Delete site folder
 rm -rf site
 
@@ -42,7 +45,7 @@ done
 
 # Copy non-versioned pages to root
 cp "${VERSION}"/index.html . # Home page
-cp custom-versioning/redirect-from-version-to-root.html "${VERSION}"/index.html
+cp ./custom-versioning/redirect-from-version-to-root.html "${VERSION}"/index.html
 for page in "${NON_VERSIONED_PAGES[@]}"; do # Other non-versioned pages
     # Delete previous root version of the page
     rm -rf "${page}"
@@ -51,7 +54,7 @@ for page in "${NON_VERSIONED_PAGES[@]}"; do # Other non-versioned pages
     NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
     for html in $NON_VERSIONED_HTMLS; do
         # Overwrite the versioned pages with redirections to root
-        cp custom-versioning/redirect-from-version-to-root.html "${html}"
+        cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
     done
 done
 
@@ -64,13 +67,17 @@ for page in "${VERSIONED_PAGES[@]}"; do
     REDIRECTION_FOR_DOCS=$(find "./docs" -iname 'index.html')
     for html in $REDIRECTION_FOR_DOCS; do
         # Overwrite the root pages with redirections to latest
-        cp custom-versioning/redirect-from-root-to-latest.html "${html}"
+        cp ./custom-versioning/redirect-from-root-to-latest.html "${html}"
     done
 done
 
 for asset in "${ASSETS[@]}"; do # Commit asset folders
     git add "${asset}"
 done
+
+# Remove unnecessary files from main branch
+git reset custom-versioning/.
+rm -rf custom-versioning
 
 # Commit the new version folder
 git add "${VERSION}"
