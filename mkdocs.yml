@@ -1,5 +1,5 @@
 site_name: openVidu
-site_url: "https://webtest.openvidu.io/"
+site_url: https://webtest.openvidu.io/
 site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted. Performant. Fault Tolerant. Scalable. Observable.
 repo_name: pabloFuente/test.openvidu.io
 repo_url: https://github.com/pabloFuente/test.openvidu.io
