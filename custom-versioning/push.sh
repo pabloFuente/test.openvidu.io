@@ -16,7 +16,7 @@ cd "$(dirname "$0")" || exit
 cd ..
 
 # Pull remote changes of branch gh-pages
-git checkout gh-pages
+git checkout -B gh-pages
 git pull origin gh-pages
 git checkout main
 
