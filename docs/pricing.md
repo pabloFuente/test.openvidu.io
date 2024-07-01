@@ -4,17 +4,13 @@ hide:
   - navigation
   - toc
   - footer
+  - search-bar
+  - version-selector
 ---
 
 <style>
   main > div.md-grid {
     max-width: 61rem;
-  }
-  div.md-version {
-    display: none !important;
-  }
-  div.md-search {
-    display: none !important;
   }
 </style>
 

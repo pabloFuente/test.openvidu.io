@@ -3,16 +3,9 @@ title: Terms of Service
 hide:
   - navigation
   - toc
+  - search-bar
+  - version-selector
 ---
-
-<style>
-  div.md-version {
-    display: none !important;
-  }
-  div.md-search {
-    display: none !important;
-  }
-</style>
 
 The purpose of the following terms and conditions is to explain our obligations as providers of the service, as well as your obligations as a client. Please read them carefully. 
 

@@ -8,16 +8,9 @@ authors:
 hide:
   - navigation
   - toc
+  - search-bar
+  - version-selector
 ---
-
-<style>
-  div.md-version {
-    display: none !important;
-  }
-  div.md-search {
-    display: none !important;
-  }
-</style>
 
 # OpenVidu 3.0.0 (BETA)
 

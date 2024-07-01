@@ -3,16 +3,9 @@ title: Cookie Policy
 hide:
   - navigation
   - toc
+  - search-bar
+  - version-selector
 ---
-
-<style>
-  div.md-version {
-    display: none !important;
-  }
-  div.md-search {
-    display: none !important;
-  }
-</style>
 
 ## What are cookies?
 
