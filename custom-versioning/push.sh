@@ -15,15 +15,15 @@ fi
 cd "$(dirname "$0")" || exit
 cd ..
 
+# Pull remote changes of branch gh-pages
+git checkout gh-pages
+git pull origin gh-pages
+git checkout main
+
 # Build the new version with mike
 mike deploy --push --update-aliases "${VERSION}" latest
 # Set the default version to latest
 mike set-default --push latest
-
-# Checkout to gh-pages branch
-git checkout gh-pages
-# Pull remote changes if any
-git pull origin gh-pages
 
 # Copy necessary files from main branch
 git checkout main -- custom-versioning/.
