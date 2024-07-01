@@ -16,7 +16,8 @@ cd "$(dirname "$0")" || exit
 cd ..
 
 # If branch gh-pages exists in the remote repository, pull changes
-git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1
+BRANCH="gh-pages"
+git ls-remote --exit-code --heads origin $BRANCH >/dev/null 2>&1
 if [[ $? == '0' ]]; then
     echo "Git branch '$BRANCH' exists in the remote repository"
     git pull origin gh-pages
