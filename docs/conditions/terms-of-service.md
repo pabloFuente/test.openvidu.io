@@ -5,6 +5,15 @@ hide:
   - toc
 ---
 
+<style>
+  div.md-version {
+    display: none !important;
+  }
+  div.md-search {
+    display: none !important;
+  }
+</style>
+
 The purpose of the following terms and conditions is to explain our obligations as providers of the service, as well as your obligations as a client. Please read them carefully. 
 
 The aforementioned terms and conditions shall be applied from the moment TIKAL TECHNOLOGIES provides you with access to the service, thus it is understood that you have voluntarily accepted them as part of the contractual obligations between the parties involved, that is, between TIKAL TECHNOLOGIES (TIKAL form now on) and you as client. OpenVidu PRO is a service which will vary with time, so as to adapt to its clients and users´ new requirements, which in turn, will likely affect the terms and conditions so that they suit the changes and variations made to TIKAL. 

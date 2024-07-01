@@ -6,6 +6,15 @@ hide:
   - footer
 ---
 
+<style>
+  div.md-version {
+    display: none !important;
+  }
+  div.md-search {
+    display: none !important;
+  }
+</style>
+
 # Support
 
 <div markdown="1" style="font-size: 20px">

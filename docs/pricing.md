@@ -10,6 +10,12 @@ hide:
   main > div.md-grid {
     max-width: 61rem;
   }
+  div.md-version {
+    display: none !important;
+  }
+  div.md-search {
+    display: none !important;
+  }
 </style>
 
 # Pricing

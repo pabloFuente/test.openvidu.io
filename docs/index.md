@@ -7,6 +7,15 @@ hide:
   - footer
 ---
 
+<style>
+  div.md-version {
+    display: none !important;
+  }
+  div.md-search {
+    display: none !important;
+  }
+</style>
+
 # Home { .hide }
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">

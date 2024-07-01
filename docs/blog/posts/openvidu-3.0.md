@@ -10,6 +10,15 @@ hide:
   - toc
 ---
 
+<style>
+  div.md-version {
+    display: none !important;
+  }
+  div.md-search {
+    display: none !important;
+  }
+</style>
+
 # OpenVidu 3.0.0 (BETA)
 
 We are proud and excited to introduce the beta version of OpenVidu 3.0.0. This is a major milestone for the project and represents many months of hard work by the entire OpenVidu team. It involves a complete overhaul of OpenVidu's internal technologies, architecture and deployment. All in order to offer the best real-time media solution out there.

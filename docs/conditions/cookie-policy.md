@@ -5,6 +5,15 @@ hide:
   - toc
 ---
 
+<style>
+  div.md-version {
+    display: none !important;
+  }
+  div.md-search {
+    display: none !important;
+  }
+</style>
+
 ## What are cookies?
 
 TIKAL TECHNOLOGIES SL web page uses cookies, which are small files that it exchanges with the visitor's web browser for different purposes. That is done in a totally "invisible" and harmless way for the visitor, so your visit to the page is more fluid and you are not interrupted by some functions. The following explains which is the usage of cookies in TIKAL TECHNOLOGIES SL website and how you can disable them if you don't agree.

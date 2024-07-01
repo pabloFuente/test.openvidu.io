@@ -9,6 +9,12 @@ hide:
   .md-typeset h1 {
     display: none;
   }
+  div.md-version {
+    display: none !important;
+  }
+  div.md-search {
+    display: none !important;
+  }
 </style>
 <link rel="stylesheet" type="text/css" href="/javascripts/openvidu-register/openvidu-register.css">
 <script>
