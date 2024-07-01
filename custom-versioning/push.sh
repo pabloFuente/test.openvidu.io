@@ -20,6 +20,7 @@ BRANCH="gh-pages"
 git ls-remote --exit-code --heads origin $BRANCH >/dev/null 2>&1
 if [[ $? == '0' ]]; then
     echo "Git branch '$BRANCH' exists in the remote repository"
+    git checkout gh-pages
     git pull origin gh-pages
     git checkout main
 else
