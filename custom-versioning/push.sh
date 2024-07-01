@@ -15,10 +15,13 @@ fi
 cd "$(dirname "$0")" || exit
 cd ..
 
-# Pull remote changes of branch gh-pages
-git checkout -B gh-pages
-git pull origin gh-pages
-git checkout main
+# Pull remote changes of branch gh-pages if it exists remotely
+if ! git checkout -t gh-pages; then
+    echo "Remote branch gh-pages does not exist"
+else
+    git pull origin gh-pages
+    git checkout main
+fi
 
 # Build the new version with mike
 mike deploy --push --update-aliases "${VERSION}" latest
