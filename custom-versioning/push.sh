@@ -15,12 +15,14 @@ fi
 cd "$(dirname "$0")" || exit
 cd ..
 
-# Pull remote changes of branch gh-pages if it exists remotely
-if ! git checkout -t gh-pages; then
-    echo "Remote branch gh-pages does not exist"
-else
+# If branch gh-pages exists in the remote repository, pull changes
+git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1
+if [[ $? == '0' ]]; then
+    echo "Git branch '$BRANCH' exists in the remote repository"
     git pull origin gh-pages
     git checkout main
+else
+    echo "Git branch '$BRANCH' does not exist in the remote repository"
 fi
 
 # Build the new version with mike
