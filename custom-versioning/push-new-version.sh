@@ -9,7 +9,7 @@ NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog")
 VERSIONED_PAGES=("docs")
 
 # Check if mike is installed
-command -v mikes >/dev/null 2>&1 || {
+command -v mike >/dev/null 2>&1 || {
     echo >&2 "mike not found. Install it with \"pip install mike\""
     exit 1
 }
@@ -38,8 +38,8 @@ cd ..
 
 # If branch gh-pages exists in the remote repository, pull changes
 BRANCH="gh-pages"
-git ls-remote --exit-code --heads origin $BRANCH >/dev/null 2>&1
-if [[ $? == '0' ]]; then
+# Check if the branch exists in the remote repository with git ls-remote
+if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
     echo "Git branch '$BRANCH' exists in the remote repository"
     git checkout gh-pages
     git pull origin gh-pages

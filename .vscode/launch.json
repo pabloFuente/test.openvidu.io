@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Bash-Debug (simplest configuration)",
             "program": "${file}",
-            "args": ["3.0.0-beta1"],
+            "args": ["1.0.0"],
         }
     ]
 }
