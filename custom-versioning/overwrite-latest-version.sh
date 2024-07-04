@@ -23,7 +23,7 @@ cd "$(dirname "$0")" || exit
 cd ..
 
 # Delete the version in gh-pages branch
-mike delete --push "${VERSION}" || { echo 'Failure deleting version with mike' ; exit 1; }
+# mike delete --push "${VERSION}" || { echo 'Failure deleting version with mike' ; exit 1; }
 # Publish again
 cd ./custom-versioning
 source ./push-new-version.sh "${VERSION}"
