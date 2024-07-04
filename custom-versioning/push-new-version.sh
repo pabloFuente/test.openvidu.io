@@ -53,6 +53,10 @@ else
     echo "Git branch '$BRANCH' does not exist in the remote repository"
 fi
 
+# Create a new tag for the new version
+git tag -a "${VERSION}" -m "Tag ${VERSION}"
+git push origin "${VERSION}"
+
 if [ "$UPDATE_LATEST" = true ]; then
     # Build and deploy the new version with mike, updating latest alias
     mike deploy --push --update-aliases "${VERSION}" latest
