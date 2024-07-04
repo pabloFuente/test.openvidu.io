@@ -13,7 +13,7 @@ hide:
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
-    Create your real-time video and audio application with ease
+    Create your real-time video and audio application with ease!!!
   </h2>
 </div>
 
