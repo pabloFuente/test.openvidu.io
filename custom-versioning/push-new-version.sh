@@ -33,7 +33,7 @@ else
 fi
 
 # Navigate to the root of the repository based on the script location
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit
 cd ..
 
 if [[ $(git status --porcelain) ]]; then

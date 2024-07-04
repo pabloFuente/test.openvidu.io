@@ -5,7 +5,10 @@ set -e
 # documentation, also updating the non-versioned pages located at root
 
 # Check if mike is installed
-command -v mike >/dev/null 2>&1 || { echo >&2 "mike not found. Install it with \"pip install mike\""; exit 1; }
+command -v mike >/dev/null 2>&1 || {
+    echo >&2 "mike not found. Install it with \"pip install mike\""
+    exit 1
+}
 
 # If there is no version passed to the script as an argument, exit
 if [ "$#" -ne 1 ]; then
@@ -20,6 +23,7 @@ cd "$(dirname "$0")" || exit
 cd ..
 
 # Delete the version in gh-pages branch
-mike delete --push "${VERSION}"
+mike delete --push "${VERSION}" || { echo 'Failure deleting version with mike' ; exit 1; }
 # Publish again
-source ./custom-versioning/push-new-version.sh "${VERSION}"
+cd ./custom-versioning
+source ./push-new-version.sh "${VERSION}"
