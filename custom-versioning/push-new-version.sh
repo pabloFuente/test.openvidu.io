@@ -36,7 +36,7 @@ fi
 cd "$(dirname "$0")"
 cd ..
 
-if git status --porcelain; then
+if [[ $(git status --porcelain) ]]; then
     echo "There are uncommitted changes in the repository. Please commit or stash them before running this script"
     exit 1
 fi
