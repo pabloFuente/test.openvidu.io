@@ -36,6 +36,11 @@ fi
 cd "$(dirname "$0")"
 cd ..
 
+if git status --porcelain; then
+    echo "There are uncommitted changes in the repository. Please commit or stash them before running this script"
+    exit 1
+fi
+
 # If branch gh-pages exists in the remote repository, pull changes
 BRANCH="gh-pages"
 # Check if the branch exists in the remote repository with git ls-remote
