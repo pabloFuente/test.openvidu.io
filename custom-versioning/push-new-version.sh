@@ -70,16 +70,25 @@ else
 fi
 
 # Checkout to gh-pages branch
-git checkout gh-pages || { echo 'Failure checking out to gh-pages' ; exit 1; }
+git checkout gh-pages || {
+    echo 'Failure checking out to gh-pages'
+    exit 1
+}
 
 # Pull again for remote changes
-git pull origin gh-pages || { echo 'Failure pulling from remote gh-pages' ; exit 1; }
+git pull origin gh-pages || {
+    echo 'Failure pulling from remote gh-pages'
+    exit 1
+}
 
 # Delete site folder
 rm -rf site
 
 # Copy necessary files from main branch
-git restore --source main custom-versioning/. || { echo 'Failure copying files from main branch' ; exit 1; }
+git restore --source main custom-versioning/. || {
+    echo 'Failure copying files from main branch'
+    exit 1
+}
 
 # Wait until this file exists in branch gh-pages
 until [ -f ./custom-versioning/redirect-from-version-to-root.html ]; do
@@ -172,3 +181,5 @@ fi
 git push --set-upstream origin gh-pages
 
 git checkout main
+
+echo "Success publishing documentation for version ${VERSION}!"
