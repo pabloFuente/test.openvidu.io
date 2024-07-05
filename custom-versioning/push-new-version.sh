@@ -53,9 +53,20 @@ else
     echo "Git branch '$BRANCH' does not exist in the remote repository"
 fi
 
-# Create a new tag for the new version
+# Check for the existence of the version tag
 if [ "$(git tag -l "$VERSION")" ]; then
     echo "Tag ${VERSION} already exists"
+    if [ "$UPDATE_LATEST" = false ]; then
+        # Updating a past version. Check out to the tag
+        git checkout "${VERSION}" || {
+            echo "Failure checking out to past tag ${VERSION}"
+            exit 1
+        }
+        git pull origin "${VERSION}" || {
+            echo "Failure pulling from remote tag ${VERSION}"
+            exit 1
+        }
+    fi
 else
     echo "Creating tag ${VERSION}"
     git tag -a "${VERSION}" -m "Tag ${VERSION}"

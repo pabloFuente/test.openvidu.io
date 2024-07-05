@@ -59,9 +59,12 @@ cd custom-versioning
 
 ### Overwriting a past version
 
-This script overwrites the content of a specific past version without touching the non-versioned files at root. It requires the repository to be checked out at the proper tag of the past version.
+This script overwrites the content of a specific past version without touching the non-versioned files at root.
+
+> **IMPORTANT**: all changes to be pushed to the past version must be already committed to the proper version tag in GitHub. No changes in branch `main `will be pushed to the past version.
 
 ```bash
+# With the desired changes already commited in tag "3.0.0"
 cd custom-versioning
 ./overwrite-past-version.sh 3.0.0
 ```

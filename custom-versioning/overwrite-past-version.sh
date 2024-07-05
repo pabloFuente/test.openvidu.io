@@ -36,5 +36,6 @@ mike delete --push "${VERSION}" || {
     exit 1
 }
 # Publish again
+echo "Overwriting past version ${VERSION}"
 cd ./custom-versioning
 source ./push-new-version.sh "${VERSION}" false
