@@ -54,8 +54,13 @@ else
 fi
 
 # Create a new tag for the new version
-git tag -a "${VERSION}" -m "Tag ${VERSION}"
-git push origin "${VERSION}"
+if [ "$(git tag -l "$VERSION")" ]; then
+    echo "Tag ${VERSION} already exists"
+else
+    echo "Creating tag ${VERSION}"
+    git tag -a "${VERSION}" -m "Tag ${VERSION}"
+    git push origin "${VERSION}"
+fi
 
 if [ "$UPDATE_LATEST" = true ]; then
     # Build and deploy the new version with mike, updating latest alias

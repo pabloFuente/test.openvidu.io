@@ -37,4 +37,4 @@ mike delete --push "${VERSION}" || {
 }
 # Publish again
 cd ./custom-versioning
-source ./custom-versioning/push-new-version.sh "${VERSION}" false
+source ./push-new-version.sh "${VERSION}" false
