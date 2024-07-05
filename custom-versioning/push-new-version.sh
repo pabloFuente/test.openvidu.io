@@ -68,9 +68,14 @@ if [ "$(git tag -l "$VERSION")" ]; then
         }
     fi
 else
-    echo "Creating tag ${VERSION}"
-    git tag -a "${VERSION}" -m "Tag ${VERSION}"
-    git push origin "${VERSION}"
+    if [ "$UPDATE_LATEST" = false ]; then
+        echo "The tag ${VERSION} does not exist. To update a past version, the tag must exist"
+        exit 1
+    else
+        echo "Creating tag ${VERSION}"
+        git tag -a "${VERSION}" -m "Tag ${VERSION}"
+        git push origin "${VERSION}"
+    fi
 fi
 
 if [ "$UPDATE_LATEST" = true ]; then

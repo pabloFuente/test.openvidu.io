@@ -23,12 +23,12 @@ cd "$(dirname "$0")" || exit
 cd ..
 
 # Check if the current git tag exactly matches the version
-CURRENT_GIT_TAG=$(git describe --tags --abbrev=0)
-if [ "$CURRENT_GIT_TAG" != "$VERSION" ]; then
-    echo "The current git tag does not match version $VERSION (current tag is $CURRENT_GIT_TAG)"
-    echo "To overwrite a past version the local repository must be checked out at this specific tag"
-    exit 1
-fi
+# CURRENT_GIT_TAG=$(git describe --tags --abbrev=0)
+# if [ "$CURRENT_GIT_TAG" != "$VERSION" ]; then
+#     echo "The current git tag does not match version $VERSION (current tag is $CURRENT_GIT_TAG)"
+#     echo "To overwrite a past version the local repository must be checked out at this specific tag"
+#     exit 1
+# fi
 
 # Delete the version in gh-pages branch
 mike delete --push "${VERSION}" || {
