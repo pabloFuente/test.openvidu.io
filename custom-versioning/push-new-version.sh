@@ -112,18 +112,18 @@ until [ -f ./custom-versioning/redirect-from-version-to-root.html ]; do
     sleep 1
 done
 
-# Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
-# E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
-for page in "${NON_VERSIONED_PAGES[@]}"; do
-    NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
-    for html in $NON_VERSIONED_HTMLS; do
-        cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
-    done
-done
-
 if [ "$UPDATE_LATEST" = false ]; then
 
     echo "The latest version will not be updated"
+
+    # Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
+    # E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
+    for page in "${NON_VERSIONED_PAGES[@]}"; do
+        NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
+        for html in $NON_VERSIONED_HTMLS; do
+            cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
+        done
+    done
 
     # Commit the updated version folder
     git add "${VERSION}"
@@ -149,6 +149,12 @@ else
         rm -rf "${page}"
         # Copy new page as their root version
         cp -r "${VERSION}"/"${page}" .
+        # Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
+        # E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
+        NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
+        for html in $NON_VERSIONED_HTMLS; do
+            cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
+        done
     done
 
     # Create redirections to latest for versioned pages in root
