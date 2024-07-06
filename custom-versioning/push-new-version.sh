@@ -129,6 +129,9 @@ if [ "$UPDATE_LATEST" = false ]; then
         done
     done
 
+    # Remove unnecessary files from gh-pages branch
+    rm -rf custom-versioning
+
     # Commit the new version folder
     git add "${VERSION}"
     git commit -am "Version ${VERSION} updated. Non-versioned pages untouched"
