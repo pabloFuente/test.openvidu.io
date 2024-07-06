@@ -116,23 +116,20 @@ until [ -f ./custom-versioning/redirect-from-version-to-root.html ]; do
     sleep 1
 done
 
+# Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
+# E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
+for page in "${NON_VERSIONED_PAGES[@]}"; do
+    NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
+    for html in $NON_VERSIONED_HTMLS; do
+        cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
+    done
+done
+
 if [ "$UPDATE_LATEST" = false ]; then
 
     echo "The latest version will not be updated"
 
-    # Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
-    # E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
-    for page in "${NON_VERSIONED_PAGES[@]}"; do
-        NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
-        for html in $NON_VERSIONED_HTMLS; do
-            cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
-        done
-    done
-
-    # Remove unnecessary files from gh-pages branch
-    rm -rf custom-versioning
-
-    # Commit the new version folder
+    # Commit the updated version folder
     git add "${VERSION}"
     git commit -am "Version ${VERSION} updated. Non-versioned pages untouched"
 
@@ -156,12 +153,6 @@ else
         rm -rf "${page}"
         # Copy new page as their root version
         cp -r "${VERSION}"/"${page}" .
-        # Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
-        # E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
-        NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
-        for html in $NON_VERSIONED_HTMLS; do
-            cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
-        done
     done
 
     # Create redirections to latest for versioned pages in root
@@ -177,9 +168,6 @@ else
             cp ./custom-versioning/redirect-from-root-to-latest.html "${html}"
         done
     done
-
-    # Remove unnecessary files from gh-pages branch
-    rm -rf custom-versioning
 
     # Commit asset folders
     for asset in "${ASSETS[@]}"; do
@@ -201,6 +189,9 @@ else
     git commit -am "Version ${VERSION} updated. Non-versioned pages updated"
 
 fi
+
+# Remove unnecessary files from gh-pages branch
+rm -rf custom-versioning
 
 git push --set-upstream origin gh-pages
 
