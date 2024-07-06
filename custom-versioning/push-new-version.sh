@@ -42,39 +42,35 @@ if [[ $(git status --porcelain) ]]; then
 fi
 
 # If branch gh-pages exists in the remote repository, pull changes
-BRANCH="gh-pages"
+GH_BRANCH="gh-pages"
 # Check if the branch exists in the remote repository with git ls-remote
-if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
-    echo "Git branch '$BRANCH' exists in the remote repository"
-    git checkout gh-pages
-    git pull origin gh-pages
+if git ls-remote --heads origin "$GH_BRANCH" | grep -q "$GH_BRANCH"; then
+    echo "Git branch '$GH_BRANCH' exists in the remote repository"
+    git checkout "$GH_BRANCH"
+    git pull origin "$GH_BRANCH"
     git checkout main
 else
-    echo "Git branch '$BRANCH' does not exist in the remote repository"
+    echo "Git branch '$GH_BRANCH' does not exist in the remote repository. This is the first version deployment"
 fi
 
-# Check for the existence of the version tag
-if [ "$(git tag -l "$VERSION")" ]; then
-    echo "Tag ${VERSION} already exists"
-    if [ "$UPDATE_LATEST" = false ]; then
-        # Updating a past version. Check out to the tag
-        git checkout "${VERSION}" || {
-            echo "Failure checking out to past tag ${VERSION}"
-            exit 1
-        }
-        git pull origin "${VERSION}" || {
-            echo "Failure pulling from remote tag ${VERSION}"
-            exit 1
-        }
+# If the version branch exists in the remote repository, pull changes. If not, create it
+VERSION_BRANCH="${VERSION}"
+# Check if the branch exists in the remote repository with git ls-remote
+if git ls-remote --heads origin "$VERSION_BRANCH" | grep -q "$VERSION_BRANCH"; then
+    echo "Git branch '$VERSION_BRANCH' exists in the remote repository"
+    git checkout "$VERSION_BRANCH"
+    git pull origin "$VERSION_BRANCH"
+    if [ "$UPDATE_LATEST" = true ]; then
+        git checkout main
     fi
 else
     if [ "$UPDATE_LATEST" = false ]; then
-        echo "The tag ${VERSION} does not exist. To update a past version, the tag must exist"
+        echo "The branch ${VERSION_BRANCH} does not exist. To update a past version, the branch must exist"
         exit 1
     else
-        echo "Creating tag ${VERSION}"
-        git tag -a "${VERSION}" -m "Tag ${VERSION}"
-        git push origin "${VERSION}"
+        echo "Git branch '$VERSION_BRANCH' does not exist in the remote repository. Creating it"
+        git checkout -b "$VERSION_BRANCH"
+        git push -u origin "$VERSION_BRANCH"
     fi
 fi
 
