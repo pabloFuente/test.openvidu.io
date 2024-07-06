@@ -31,3 +31,9 @@ mike delete --push "${VERSION}" || {
 echo "Overwriting latest version ${VERSION}"
 cd ./custom-versioning
 source ./push-new-version.sh "${VERSION}"
+
+# Merge latest commits of main into VERSION branch. This keeps the latest VERSION branch up to date with main
+git switch "${VERSION}"
+git rebase main
+git push --force
+git switch main
